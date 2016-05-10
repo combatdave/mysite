@@ -5,9 +5,12 @@ from .models import Greeting
 
 
 def db(request):
-    greeting = Greeting()
-    greeting.save()
+	greeting = Greeting()
+	greeting.save()
 
-    greetings = Greeting.objects.all()
+	greetings = Greeting.objects.all()
 
-    return render(request, 'db.html', {'greetings': greetings})
+	text = "</br>".join([str(g.when) for g in greetings])
+
+	return HttpResponse('<pre>' + text + '</pre>')
+	#return render(request, 'db.html', {'greetings': greetings})
